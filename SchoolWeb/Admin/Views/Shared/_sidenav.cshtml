@@ -1,0 +1,61 @@
+﻿<div id="side-nav">
+    <nav>
+        <ul>
+            <li>
+                <a href="/Student/index" class="sidelink">
+                    <span><i class="fa fa-user-graduate"></i></span>
+                    <span>Şagirdlər</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Teacher/index" class="sidelink">
+                    <span><i class="fa fa-user-tie"></i></span>
+                    <span>Müəllimlər</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Class/index" class="sidelink">
+                    <span><i class="fa fa-building"></i></span>
+                    <span>Siniflər</span>
+                </a>
+            </li>
+            <li>
+                <a href="/Mark/index" class="sidelink">
+                    <span><i class="fa fa-pencil-alt"></i></span>
+                    <span>Qiymətlər</span>
+                </a>
+            </li>
+            <li>
+                <a href="/TeachersClasses/index" class="sidelink">
+                    <span><i class="fa fa-user-alt"></i></span>
+                    <span>Müəllimlər S.</span>
+                </a>
+            </li>
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a href="/Trash/index" class="sidelink">
+                        <span><i class="fa fa-trash"></i></span>
+                        <span>Silinənlər</span>
+                    </a>
+                </li>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <li>
+                    <a href="/User/index" class="sidelink">
+                        <span><i class="fa fa-cog"></i></span>
+                        <span>İstifadəçilər</span>
+                    </a>
+                </li>
+            }
+                <li>
+                    <a href="/Security/Logout" class="sidelink">
+                        <span><i class="fa fa-sign-out-alt"></i></span>
+                        <span>Çıxış</span>
+                    </a>
+                </li>
+            </ul>
+    </nav>
+</div>
+

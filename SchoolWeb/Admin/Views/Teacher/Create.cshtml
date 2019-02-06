@@ -1,0 +1,60 @@
+﻿@model Admin.Models.Teacher
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name)
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Surname)
+                    @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Surname)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Address)
+                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.DateOfBirth)
+                    @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(m => m.DateOfBirth)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Salary)
+                    @Html.TextBoxFor(m => m.Salary, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Salary)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Subject)
+                    @Html.TextBoxFor(m => m.Subject, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Subject)
+                </div>
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                @Html.AntiForgeryToken()
+            </div>
+            <div class="col-sm-6">
+                <img src="~/Content/Images/linux-add-user.jpg" width="150" />
+                <div class="editor-field">
+                    <input type="file" name="file" id="file" />
+                </div>
+                <p style="color:red;">@ViewBag.message</p>
+            </div>
+        </div>
+    </div>
+}
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

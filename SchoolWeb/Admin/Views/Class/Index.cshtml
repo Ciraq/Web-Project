@@ -1,0 +1,101 @@
+﻿@model List<Admin.Models.TableClass>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Yeni Sinif", "Create", null, new { @class = "btn btn-success Addbtn" })
+            }
+            <table id="dttable" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sinif Nömrəsi</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th></th>
+                        }
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sinif Nömrəsi</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th></th>
+                        }
+                            <th></th>
+                            <th></th>
+                        </tr>
+                </tfoot>
+
+                <tbody>
+                    @foreach (var classes in Model)
+                    {
+                    <tr>
+                        <td>@classes.ID</td>
+                        <td>@classes.ClassNo</td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a href="@Url.Action("Update", "Class", new { id = classes.ID })" class="btn btn-primary btn-sm" style="color:white"><i class="fa fa-pen fa-sm"></i></a>
+                                <a data-id="@classes.ID" class="btn btn-danger btn-sm js-delete" style="color:white"><i class="fa fa-trash fa-sm"></i></a>
+                            </td>
+                        }
+                            <td>
+                                @Ajax.ActionLink("Şagirdləri Göstər", "ShowsStudents", "Student", new { id = classes.ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "StudentList" }, new { @class = "btn btn-primary" })
+                            </td>
+                            <td>
+                                @Ajax.ActionLink("Müəllimləri Göstər", "ShowTeachers", "TeachersClasses", new { id = classes.ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "TeacherList" }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div id="StudentList"></div>
+            <div id="TeacherList"></div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+}
+
+@section scripts{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/MyDataTable.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#dttable ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Bu məlumatı silməyə əminsinizmi?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/class/Delete/" + button.attr("data-id"),
+                            method: "GET",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+

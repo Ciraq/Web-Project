@@ -1,0 +1,34 @@
+﻿@model Admin.ViewModels.TeachersClassesViewModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "TeachersClasses", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.teachersClasses.TeacherID)
+                    @Html.DropDownListFor(m => m.teachersClasses.TeacherID, new SelectList(Model.teachers, "ID", "ID"), "İD seçin", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.teachersClasses.TeacherID)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.teachersClasses.ClassID)
+                    @Html.DropDownListFor(m => m.teachersClasses.ClassID, new SelectList(Model.tableclasses, "ID", "ClassNo"), "Sinif seçin", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.teachersClasses.ClassID)
+                </div>
+                @Html.HiddenFor(m => m.teachersClasses.ID)
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+            </div>
+        </div>
+    </div>
+}
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

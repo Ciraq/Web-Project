@@ -1,0 +1,230 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+    /*HEADER*/
+.navbar{
+    background:linear-gradient(to right,#00c5fb 0%,#0253cc 100%);
+    z-index: 3;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.6);
+
+}
+.my_navbar {
+    padding-right: 0px!important;
+    padding-left: 0px!important;
+}
+.py-0{
+    height: 56px;
+    padding: 0px;
+}
+.toggle{
+    top: 10%;
+    left: 10%;
+    width: 70px;
+    height: 56px;
+    transform: translateX(0%);
+    cursor: pointer;
+}
+.toggle:hover{
+    background:#18b1dc;
+    transition: .6s;
+}
+.toggle span{
+    background: #fff;
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 5px;
+    top: 45%;
+    left: 24%;
+    transform: translateX(-20%);
+    transition: .5s;
+    box-shadow: 0 1px 1px rgba(0,0,0,.1);
+    margin-left: 6px;
+}
+.toggle span:nth-child(1){
+    transform: translate(-20%,-10%) translateY(-10px);
+}
+.toggle span:nth-child(4){
+    transform: translate(-20%,-10%) translateY(10px);
+} 
+.toggle.active span:nth-child(1){
+    transform: translate(-20%) translateY(-25px);
+    opacity: 0;
+}
+.toggle.active span:nth-child(4){
+    transform: translate(-20%) translateY(25px);
+    opacity: 0;
+}
+.toggle.active span:nth-child(2){
+    transform: translateX(-35%)rotate(-90deg);
+    transition-delay: .2s;
+}
+
+.toggle.active span:nth-child(3){
+    transform: translate(0%) rotate(90deg);
+    transition-delay: .2s;
+}
+.user-menu{
+    transition: .5s;
+    padding-left: 10px!important;
+}
+.current{
+    background: #0246A5;
+}
+.user-menu a{
+    text-decoration: none;
+    display: block;
+    height: auto;
+    line-height: 40px;
+    min-height: 40px;
+    padding: 8px 0;
+}
+.user-menu:hover{
+    cursor: pointer;
+}
+.img-circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+}
+.user-img{
+    display: inline-block;
+    position: relative;
+}
+.user-link span{
+    color: #fff;
+}
+.user-link i{
+    color: #fff;
+}
+.dropdown-user{
+    position: absolute;
+    background: #0253cc;
+    border-radius: 3px;
+    list-style: none;
+    display: block;
+    min-width: 169px;
+    margin-top: 1px;
+    margin-left: -10px;
+    padding: 0px;
+    opacity: 0;
+    visibility: hidden;
+}
+.dropdown-user.active{
+    opacity: 100;
+    visibility: visible;
+}
+.dropdown-user li{
+    padding-left: 15px;
+    color: #fff;
+}
+.dropdown-user li:hover{
+    background: #18b1dc;
+}
+
+   /*SIDE-NAV*/
+#side-nav{
+    width: 180px;
+    height: 100%;
+    position: fixed;
+    margin-top: 56px;
+    background: #222D32;
+    transition: .5s;
+    z-index: 2;
+}
+#side-nav ul li a{
+    color:#b8c7ce;
+    text-decoration: none;
+    width: 180px;
+    display: block;
+    font-size: 16px;
+    height: auto;
+    line-height: 40px;
+    min-height: 40px;
+    padding: 0 20px;
+}
+#side-nav.active{
+    width: 70px;
+}
+#side-nav.active ul li span:nth-child(2){
+    display: none;
+}
+#side-nav.active ul li i{
+    font-size: 26px;
+    margin-top: 7px;
+}
+#side-nav.active ul li a{
+    width: 70px;
+}
+#side-nav ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+#side-nav ul li{
+    cursor: hand;
+}
+#side-nav ul li:hover{
+    background:#1E282C;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    
+}
+a {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#side-nav ul li a:hover{
+    color: white;
+    width: 170px;
+    margin-left:10px;
+        -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+#side-nav.active ul li a:hover{
+    width: 60px;
+} 
+
+#side-nav ul li i{
+    margin-right: 10px;
+}
+
+  /*CONTENT*/
+#main-content{
+    left: 0;
+    margin-left:180px;
+    padding-top: 56px;
+    position: relative;
+    transition: all 400ms linear;
+}
+#main-content.active{
+    margin-left: 70px;
+}
+.content{
+    padding: 15px;
+}
+.Addbtn{
+    margin-bottom:20px;
+}
+
+.field-validation-error{
+    color:red;
+}
+
+.input-validation-error{
+    border:solid 2px red;
+}
+
+
+
+
+ 
+
+

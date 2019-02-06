@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Admin.Models.Student>
+
+<h1>Şagirdlərin siyahısı</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>İD</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Doğum Günü</th>
+            <th>Ünvan</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+        <tr>
+            <td>@student.ID</td>
+            <td>@student.Name</td>
+            <td>@student.Surname</td>
+            <td>@student.DateOfBirth</td>
+            <td>@student.Address</td>
+            <td>
+                <a href="@Url.Action("Update","Student",new {id=student.ID })" class="btn btn-primary btn-sm" style="color:white"><i class="fa fa-pen fa-sm"></i></a>
+                <a href="@Url.Action("Delete","Student",new {id=student.ID })" class="btn btn-danger btn-sm" style="color:white"><i class="fa fa-trash fa-sm"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

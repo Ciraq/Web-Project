@@ -1,0 +1,132 @@
+﻿@model List<Admin.Models.Mark>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+            {
+                @Html.ActionLink("Yeni Qiymet", "Create", null, new { @class = "btn btn-success Addbtn" })
+            }
+            <table id="dttable" class="table table-striped table-bordered" style="font-size:13px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Azərbaycan dili</th>
+                        <th>Biologiya</th>
+                        <th>Kimya</th>
+                        <th>İngilis dili</th>
+                        <th>Riyaziyyat</th>
+                        <th>Coğrafiya</th>
+                        <th>Tarix</th>
+                        <th>İnformatika</th>
+                        <th>Fizika</th>
+                        <th>Ədəbiyyat</th>
+                        <th>Rüb</th>
+                        <th>Yekun</th>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                        {
+                            <th></th>
+                            <th></th>
+                        }
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Soyad</th>
+                        <th>Azərbaycan dili</th>
+                        <th>Biologiya</th>
+                        <th>Kimya</th>
+                        <th>İngilis dili</th>
+                        <th>Riyaziyyat</th>
+                        <th>Coğrafiya</th>
+                        <th>Tarix</th>
+                        <th>İnformatika</th>
+                        <th>Fizika</th>
+                        <th>Ədəbiyyat</th>
+                        <th>Rüb</th>
+                        <th>Yekun</th>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                        {
+                            <th></th>
+                            <th></th>
+                        }
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    @foreach (var mark in Model)
+                    {
+                    <tr>
+                        <td>@mark.Student.ID</td>
+                        <td>@mark.Student.Name</td>
+                        <td>@mark.Student.Surname</td>
+                        <td>@mark.Azerbaijani</td>
+                        <td>@mark.Biology</td>
+                        <td>@mark.Chemistry</td>
+                        <td>@mark.English</td>
+                        <td>@mark.Math</td>
+                        <td>@mark.Geography</td>
+                        <td>@mark.History</td>
+                        <td>@mark.Informatics</td>
+                        <td>@mark.Physics</td>
+                        <td>@mark.Literature</td>
+                        <td>@mark.Semester</td>
+                        <td>@mark.Result</td>
+
+                        @if (User.IsInRole("Admin") || User.IsInRole("Teacher"))
+                        {
+                            <td>
+                                <a href="@Url.Action("Update","Mark",new {id=mark.ID })" class="btn btn-primary btn-sm" style="color:white"><i class="fa fa-pen fa-sm"></i></a>
+                            </td>
+                            <td>
+                                <a data-id="@mark.ID" class="btn btn-danger btn-sm js-delete" style="color:white"><i class="fa fa-trash fa-sm"></i></a>
+                            </td>
+                        }
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+}
+
+@section scripts{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dttable ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Bu məlumatı silməyə əminsinizmi?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/mark/Delete/" + button.attr("data-id"),
+                            method: "GET",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,24 @@
+﻿@model Admin.Models.TableClass
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Class", FormMethod.Post))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ClassNo)
+                    @Html.TextBoxFor(m => m.ClassNo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m=>m.ClassNo)
+                </div>
+                @Html.HiddenFor(m => m.ID)
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+            </div>
+        </div>
+    </div>
+}
+

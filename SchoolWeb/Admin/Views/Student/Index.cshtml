@@ -1,0 +1,116 @@
+﻿@model List<Admin.Models.Student>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            @if (User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Yeni Şagird", "Create", null, new { @class = "btn btn-success Addbtn" })
+
+            }
+            <table id="dttable" class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>İD</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Doğum Günü</th>
+                        <th>Ünvan</th>
+                        <th>Sinif</th>
+                        <th>Şəkil</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th></th>
+                        }
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>İD</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Doğum Günü</th>
+                        <th>Ünvan</th>
+                        <th>Sinif</th>
+                        <th>Şəkil</th>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <th></th>
+                        }
+                        <th></th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                    <tr>
+                        <td>@student.ID</td>
+                        <td>@student.Name</td>
+                        <td>@student.Surname</td>
+                        <td>@student.DateOfBirth.ToShortDateString()</td>
+                        <td>@student.Address</td>
+                        <td>@student.TableClass.ClassNo</td>
+                        <td>
+                            @{
+                                var base64 = Convert.ToBase64String(student.Image);
+                                var imgsrc = String.Format("data:image/png;base64,{0}", base64);
+                            }
+                            <img src="@imgsrc" width="55" height="55" style="margin-left:20px;" />
+                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a href="@Url.Action("Update","Student",new {id=student.ID })" class="btn btn-primary btn-sm" style="color:white"><i class="fa fa-pen fa-sm"></i></a>
+                                <a data-id="@student.ID" class="btn btn-danger btn-sm js-delete" style="color:white"><i class="fa fa-trash fa-sm"></i></a>
+                            </td>
+                        }
+                        <td>
+                            @Ajax.ActionLink("Qiymət", "ShowsMarks", "Mark", new { id = student.ID }, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "MarkList" }, new { @class = "btn btn-primary" })
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+            <div id="MarkList"></div>
+        </div>
+    </div>
+</div>
+
+@section styles{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
+}
+
+@section scripts{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/MyDataTable.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#dttable ").on("click",".js-delete",function () {
+                var button = $(this);
+                bootbox.confirm("Bu məlumatı silməyə əminsinizmi?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/student/Delete/" + button.attr("data-id"),
+                            method: "GET",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
+

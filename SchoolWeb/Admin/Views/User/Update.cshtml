@@ -1,0 +1,55 @@
+﻿@model Admin.Models.User
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserRole)
+                    @Html.TextBoxFor(m => m.UserRole, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserRole)
+                </div>
+                @Html.HiddenFor(m => m.UserID)
+                @Html.HiddenFor(m => m.UserImage)
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+            </div>
+            <div class="col-sm-6">
+                @{
+                    var base64 = Convert.ToBase64String(Model.UserImage);
+                    var imgsrc = String.Format("data:image/png;base64,{0}", base64);
+                }
+                <img src="@imgsrc" width="150" />
+                <div class="editor-field">
+                    <input type="file" name="file" id="file" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

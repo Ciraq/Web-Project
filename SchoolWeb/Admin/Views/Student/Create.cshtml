@@ -1,0 +1,59 @@
+﻿@model Admin.ViewModels.StudentClassViewModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.Name)
+                    @Html.TextBoxFor(m => m.Student.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.Surname)
+                    @Html.TextBoxFor(m => m.Student.Surname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.Surname)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.ClassID)
+                    @Html.DropDownListFor(m => m.Student.ClassID, new SelectList(Model.Classes, "ID", "ClassNo"), "Sinif seçin", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.ClassID)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.Address)
+                    @Html.TextBoxFor(m => m.Student.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.Address)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.DateOfBirth)
+                    @Html.TextBoxFor(m => m.Student.DateOfBirth, new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(m => m.Student.DateOfBirth)
+                </div>
+
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                @Html.AntiForgeryToken()
+            </div>
+            <div class="col-sm-6">
+                <img src="~/Content/Images/student.png" width="150" />
+                <div class="editor-field">
+                    <input type="file" name="file" id="file" />
+                </div>
+                <p style="color:red;">@ViewBag.message</p>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+

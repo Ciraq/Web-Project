@@ -1,0 +1,93 @@
+﻿@model Admin.ViewModels.StudentsMarkViewModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Mark", FormMethod.Post))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.StudentID)
+                    @Html.DropDownListFor(m => m.mark.StudentID, new SelectList(Model.students, "ID", "ID"), "Şagird seçin", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.StudentID)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Azerbaijani)
+                    @Html.TextBoxFor(m => m.mark.Azerbaijani, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Azerbaijani)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Literature)
+                    @Html.TextBoxFor(m => m.mark.Literature, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Literature)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Math)
+                    @Html.TextBoxFor(m => m.mark.Math, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Math)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Physics)
+                    @Html.TextBoxFor(m => m.mark.Physics, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Physics)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Chemistry)
+                    @Html.TextBoxFor(m => m.mark.Chemistry, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Chemistry)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Geography)
+                    @Html.TextBoxFor(m => m.mark.Geography, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Geography)
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Biology)
+                    @Html.TextBoxFor(m => m.mark.Biology, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Biology)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.History)
+                    @Html.TextBoxFor(m => m.mark.History, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.History)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Informatics)
+                    @Html.TextBoxFor(m => m.mark.Informatics, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Informatics)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.English)
+                    @Html.TextBoxFor(m => m.mark.English, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.English)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Semester)
+                    @Html.TextBoxFor(m => m.mark.Semester, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Semester)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.mark.Result)
+                    @Html.TextBoxFor(m => m.mark.Result, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.mark.Result)
+                </div>
+                @Html.HiddenFor(m => m.mark.ID)
+                @Html.AntiForgeryToken()
+            </div>
+        </div>
+    </div>
+}
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

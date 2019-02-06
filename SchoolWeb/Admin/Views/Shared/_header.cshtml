@@ -1,0 +1,19 @@
+﻿<nav class="navbar navbar-expand-md fixed-top py-0 my_navbar">
+    <div class="toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <a class="navbar-brand" style="color: white;" href="#"><span>School</span></a>
+    <ul class="nav navbar-nav user-menu ml-auto">
+        <li class="nav-item dropdown">
+            <a class="user-link dropdown click" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="user-img">
+                    <img class="img-circle" src="~/Content/images/user.jpg">
+                </span>
+                <span>Xoş gəlmişsiniz,@HttpContext.Current.User.Identity.Name</span>
+            </a>
+        </li>
+    </ul>
+</nav>

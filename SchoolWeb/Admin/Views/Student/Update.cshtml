@@ -1,0 +1,61 @@
+﻿@model Admin.ViewModels.StudentClassViewModel
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.HiddenFor(m=>m.Student.Image)
+                    @Html.LabelFor(m => m.Student.Name)
+                    @Html.TextBoxFor(m => m.Student.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.Name)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.Surname)
+                    @Html.TextBoxFor(m => m.Student.Surname, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.Surname)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.ClassID)
+                    @Html.DropDownListFor(m => m.Student.ClassID, new SelectList(Model.Classes, "ID", "ClassNo"), "Sinif seçin", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.ClassID)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.Address)
+                    @Html.TextBoxFor(m => m.Student.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Student.Address)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Student.DateOfBirth)
+                    @Html.TextBoxFor(m => m.Student.DateOfBirth, "{0:yyyy-MM-dd}", new { @class = "form-control", type = "date" })
+                    @Html.ValidationMessageFor(m => m.Student.DateOfBirth)
+                </div>
+                @Html.HiddenFor(m => m.Student.ID)
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+            </div>
+            <div class="col-sm-6">
+
+                @{
+                    var base64 = Convert.ToBase64String(Model.Student.Image);
+                    var imgsrc = String.Format("data:image/png;base64,{0}", base64);
+                }
+                <img src="@imgsrc" width="150" />
+                <div class="editor-field">
+                    <input class="valid" aria-invalid="false" type="file" name="file" id="file" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

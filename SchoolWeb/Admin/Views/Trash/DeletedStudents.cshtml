@@ -1,0 +1,64 @@
+﻿@model List<Admin.Models.Student>
+
+<div class="content container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Şagirdlər</h1>
+            <table id="student" class="display table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>İD</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Doğum Günü</th>
+                        <th>Ünvan</th>
+                        <th>Sinif</th>
+                        <th>Şəkil</th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+                <tfoot>
+                    <tr>
+                        <th>İD</th>
+                        <th>Adı</th>
+                        <th>Soyadı</th>
+                        <th>Doğum Günü</th>
+                        <th>Ünvan</th>
+                        <th>Sinif</th>
+                        <th>Şəkil</th>
+                        <th></th>
+                    </tr>
+                </tfoot>
+
+                <tbody>
+                    @foreach (var student in Model)
+                    {
+                    <tr>
+                        <td>@student.ID</td>
+                        <td>@student.Name</td>
+                        <td>@student.Surname</td>
+                        <td>@student.DateOfBirth.ToShortDateString()</td>
+                        <td>@student.Address</td>
+                        <td>@student.TableClass.ClassNo</td>
+                        <td>
+                            @{
+                                var base64 = Convert.ToBase64String(student.Image);
+                                var imgsrc = String.Format("data:image/png;base64,{0}", base64);
+                            }
+                            <img src="@imgsrc" width="55" height="55" style="margin-left:20px;" />
+                        </td>
+                        <td>
+                            <a href="@Url.Action("RecoverStudents","Trash",new {id=student.ID })" class="btn btn-primary btn-sm" style="color:white"><i class="fa fa-undo fa-sm"></i></a>
+                            <a href="@Url.Action("RemoveStudents","Trash",new {id=student.ID })" class="btn btn-danger btn-sm" style="color:white"><i class="fa fa-trash fa-sm"></i></a>
+                            @*<a data-id="@student.ID" class="btn btn-danger btn-sm js-delete" style="color:white"><i class="fa fa-trash fa-sm"></i></a>*@
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

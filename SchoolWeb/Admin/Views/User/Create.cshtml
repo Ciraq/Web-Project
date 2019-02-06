@@ -1,0 +1,50 @@
+﻿@model Admin.Models.User
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Save", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="content container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName)
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email)
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password)
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserRole)
+                    @Html.TextBoxFor(m => m.UserRole, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserRole)
+                </div>
+                <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                @Html.AntiForgeryToken()
+            </div>
+            <div class="col-sm-6">
+                <img src="~/Content/Images/linux-add-user.jpg" width="150" />
+                <div class="editor-field">
+                    <input type="file" name="file" id="file" />
+                </div>
+                <p style="color:red;">@ViewBag.message</p>
+            </div>
+        </div>
+    </div>
+}
+
+@section validate{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+

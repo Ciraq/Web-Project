@@ -1,0 +1,66 @@
+﻿@model Admin.ViewModels.StudentsTeachersMarksViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@Html.Partial("DeletedTeachers", Model.Teachers)
+@Html.Partial("DeletedStudents", Model.Students)
+@Html.Partial("DeletedMarks", Model.Marks)
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#mark ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Bu məlumatı silməyə əminsinizmi?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Trash/RemoveMarks/" + button.attr("data-id"),
+                            method: "GET",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    @*<script>
+        $(document).ready(function () {
+            $("#student ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Bu məlumatı silməyə əminsinizmi?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Trash/RemoveStudents/" + button.attr("data-id"),
+                            method: "GET",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>*@
+    <script>
+        $(document).ready(function () {
+            $("#teacher ").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Bu məlumatı silməyə əminsinizmi?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/Trash/RemoveTeachers/" + button.attr("data-id"),
+                            method: "GET",
+                            success: function () {
+                                button.parents("tr").remove();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}
